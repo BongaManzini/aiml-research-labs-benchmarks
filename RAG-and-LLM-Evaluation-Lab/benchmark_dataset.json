@@ -1,0 +1,22 @@
+[
+  {
+    "question": "What is the primary mechanism of Kerberoasting in Active Directory?",
+    "ground_truth_context": "Kerberoasting exploits the fact that any authenticated domain user can request a Kerberos Ticket Granting Service (TGS) ticket for any Service Principal Name (SPN). When the service account uses RC4-HMAC, the resulting ticket ciphertext can be extracted and cracked offline without communicating with the domain controller.",
+    "ground_truth_answer": "Authenticated users request a TGS ticket for an SPN, which contains a service ticket encrypted with the service account's password hash, allowing offline cracking.",
+    "retrieved_contexts": [
+      "Kerberoasting allows any valid domain account to request TGS tickets for registered SPNs. These tickets are encrypted using the target account's NTLM hash.",
+      "In Active Directory, Kerberos pre-authentication is enforced by default to prevent offline password brute forcing of AS-REP packets."
+    ],
+    "generated_answer": "In Active Directory, any domain user can request a TGS ticket for an SPN. If the target account uses weak encryption like RC4, the ticket can be captured and cracked offline using tools like Hashcat."
+  },
+  {
+    "question": "How does IMDSv2 mitigate Server-Side Request Forgery vulnerabilities in AWS?",
+    "ground_truth_context": "AWS IMDSv2 requires a session-oriented flow where clients must first make an HTTP PUT request with a custom header (X-aws-ec2-metadata-token-ttl-seconds) to obtain a session token before requesting metadata.",
+    "ground_truth_answer": "IMDSv2 requires an HTTP PUT request with a mandatory header to get a session token, preventing standard SSRF attacks that only perform GET requests.",
+    "retrieved_contexts": [
+      "IMDSv2 introduces session-oriented requests requiring an HTTP PUT method and a custom header to obtain a session token.",
+      "AWS EC2 instance metadata is accessible at 169.254.169.254."
+    ],
+    "generated_answer": "IMDSv2 prevents SSRF exploitation by requiring an initial HTTP PUT request with a custom token header. Most SSRF vectors can only execute GET requests and cannot set custom headers."
+  }
+]
